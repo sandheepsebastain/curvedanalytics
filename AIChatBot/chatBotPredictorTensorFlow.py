@@ -28,7 +28,7 @@ with open(os.getcwd()+'/AIChatBot/labelencoder.pickle', 'rb') as handle:
 model = load_model(os.getcwd()+"/AIChatBot/chatbottrainedmodel")
 
 #importing the dataset
-with open(os.getcwd()+'\\AIChatBot\\content.json') as content:
+with open(os.getcwd()+'/AIChatBot/content.json') as content:
   data1 = json.load(content)
 #getting all the data to lists
 tags = []
