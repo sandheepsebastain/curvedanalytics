@@ -19,13 +19,13 @@ le = LabelEncoder()
 #apply padding
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-with open(os.getcwd()+'\\AIChatBot\\tokenizer.pickle', 'rb') as handle:
+with open(os.getcwd()+'/AIChatBot/tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
     
-with open(os.getcwd()+'\\AIChatBot\\labelencoder.pickle', 'rb') as handle:
+with open(os.getcwd()+'/AIChatBot/labelencoder.pickle', 'rb') as handle:
     le = pickle.load(handle)
     
-model = load_model(os.getcwd()+"\\AIChatBot\\chatbottrainedmodel")
+model = load_model(os.getcwd()+"/AIChatBot/chatbottrainedmodel")
 
 #importing the dataset
 with open(os.getcwd()+'\\AIChatBot\\content.json') as content:
