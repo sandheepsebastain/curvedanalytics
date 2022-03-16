@@ -2,7 +2,7 @@ from worldbankapp import app
 import json, plotly
 from flask import render_template
 from wrangling_scripts.wrangle_data import return_figures
-from AIChatBot.chatBotPredictor import get_response
+from AIChatBot.chatBotPredictorTensorFlow import getResponse
 @app.route('/')
 @app.route('/index')
 def index():
@@ -20,5 +20,5 @@ def index():
                            figuresJSON=figuresJSON)
 @app.route('/test')
 def test():
-    szMessage=get_response("Hello")
+    szMessage=getResponse("What is your name?")
     return "<h2>"+szMessage+"</h2>"
