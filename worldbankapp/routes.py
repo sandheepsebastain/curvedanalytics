@@ -18,11 +18,14 @@ def index():
     return render_template('index.html',
                            ids=ids,
                            figuresJSON=figuresJSON)
-@app.route('/api/chatbotai/<string:Chat_Message>',methods=['GET','POST'])
-def APIChatBotAI(Chat_Message):
+
+@app.route('/api/chatbotai', methods=['GET', 'POST'])
+@app.route('/api/chatbotai/<string:Chat_Message>', methods=['GET', 'POST'])
+def APIChatBotAI(Chat_Message=None):
     if request.method=='GET':
         szMessage=getResponse(Chat_Message)
         return "<h2>"+szMessage+"</h2>"
     if request.method=='POST':
-        jsonData = request.get_json()
-        return jsonData
+        content = request.json
+        szMessage=getResponse(content['message'])
+        return {"ChatResponse":szMessage}
