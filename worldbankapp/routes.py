@@ -1,6 +1,6 @@
 from worldbankapp import app
 import json, plotly
-from flask import render_template,request,Response
+from flask import render_template,request,Response,make_response
 from wrangling_scripts.wrangle_data import return_figures
 from AIChatBot.chatBotPredictorTensorFlow import getResponse
 
@@ -20,9 +20,15 @@ def index():
                            ids=ids,
                            figuresJSON=figuresJSON)
 
-@app.route('/api/chatbotai', methods=['GET', 'POST'])
-@app.route('/api/chatbotai/<string:Chat_Message>', methods=['GET', 'POST'])
+@app.route('/api/chatbotai', methods=['GET', 'POST','OPTIONS'])
+@app.route('/api/chatbotai/<string:Chat_Message>', methods=['GET'])
 def APIChatBotAI(Chat_Message=None):
+    if request.method == "OPTIONS":
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        return response
     if request.method=='GET':
         szMessage=getResponse(Chat_Message)
         return "<h2>"+szMessage+"</h2>"
