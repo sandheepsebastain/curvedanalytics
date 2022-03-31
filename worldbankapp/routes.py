@@ -28,4 +28,12 @@ def APIChatBotAI(Chat_Message=None):
     if request.method=='POST':
         content = request.json
         szMessage=getResponse(content['message'])
-        return {"ChatResponse":szMessage}
+        headers = {'Content-Type':'application/json',
+                    'Access-Control-Allow-Origin':'*',
+                    'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'}
+        response = {
+            statusCode: 200,
+            headers:headers,
+            data: szMessage
+        }
+        return response
