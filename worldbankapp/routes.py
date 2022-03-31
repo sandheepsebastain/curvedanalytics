@@ -3,8 +3,9 @@ import json, plotly
 from flask import render_template,request
 from wrangling_scripts.wrangle_data import return_figures
 from AIChatBot.chatBotPredictorTensorFlow import getResponse
-@app.route('/')
-@app.route('/index')
+
+@app.route('/',methods=['GET'])
+@app.route('/index',methods=['GET'])
 def index():
 
     figures = return_figures()
@@ -32,8 +33,8 @@ def APIChatBotAI(Chat_Message=None):
                     'Access-Control-Allow-Origin':'*',
                     'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'}
         response = {
-            statusCode: 200,
-            headers:headers,
-            data: szMessage
+            'statusCode': 200,
+            'headers':headers,
+            'data': szMessage
         }
         return response
