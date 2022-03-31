@@ -34,6 +34,7 @@ def APIChatBotAI(Chat_Message=None):
         return "<h2>"+szMessage+"</h2>"
     if request.method=='POST':
         content = request.json
+        print(content)
         szMessage=getResponse(content['message'])
         headers = {'Content-Type':'application/json',
                     'Access-Control-Allow-Origin':'*',
