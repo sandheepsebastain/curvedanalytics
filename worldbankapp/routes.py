@@ -3,6 +3,7 @@ import json, plotly
 from flask import render_template,request,Response,make_response
 from wrangling_scripts.wrangle_data import return_figures
 from AIChatBot.chatBotPredictorTensorFlow import getResponse
+import pdb
 
 @app.route('/',methods=['GET'])
 @app.route('/index',methods=['GET'])
@@ -34,11 +35,10 @@ def APIChatBotAI(Chat_Message=None):
         return "<h2>"+szMessage+"</h2>"
     if request.method=='POST':
         content = request.json
-        print(content)
         szMessage=getResponse(content['message'])
         headers = {'Content-Type':'application/json',
                     'Access-Control-Allow-Origin':'*',
                     'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS',
                     'Access-Control-Allow-Headers':'X-Requested-With'}
 
-        return Response({'data':szMessage}, status=201, mimetype='application/json',headers=headers)
+        return Response(szMessage, status=201, mimetype='application/json',headers=headers)
