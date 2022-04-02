@@ -20,12 +20,11 @@ import pdb
 #apply padding
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-with open(os.getcwd()+'/AIChatBot/tokenizer.pickle', 'rb') as handle:
-    tokenizer = pickle.load(handle)
-    
-with open(os.getcwd()+'/AIChatBot/labelencoder.pickle', 'rb') as handle:
-    le = pickle.load(handle)
-    
+with open(os.getcwd()+'/AIChatBot/ModelParams.pickle', 'rb') as handle:
+    dictModelParams = pickle.load(handle)
+
+tokenizer=dictModelParams['tokenizer']
+le=dictModelParams['labelencoder']
 model = load_model(os.getcwd()+"/AIChatBot/chatbottrainedmodel")
 
 #importing the dataset

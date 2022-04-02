@@ -90,11 +90,13 @@ model.compile(loss="sparse_categorical_crossentropy",optimizer='adam',metrics=['
 train = model.fit(x_train,y_train,epochs=200)
 
 # saving toeknizer
-with open('tokenizer.pickle', 'wb') as handle:
-    pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
+dictModelParams={'tokenizer':tokenizer,
+                 'labelencoder':le,
+                 'pad_len':len(x_train[0])}
+
+with open('ModelParams.pickle', 'wb') as handle:
+    pickle.dump(dictModelParams, handle, protocol=pickle.HIGHEST_PROTOCOL)
     
-with open('labelencoder.pickle', 'wb') as handle:
-    pickle.dump(le, handle, protocol=pickle.HIGHEST_PROTOCOL)
     
 #saving model
 model.save('chatbottrainedmodel')
