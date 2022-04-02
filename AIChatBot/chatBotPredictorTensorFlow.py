@@ -15,6 +15,7 @@ import os
 #encoding the outputs
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
+import pdb
 
 #apply padding
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -49,7 +50,7 @@ def getResponse(szMessage):
     #tokenizing and padding
     prediction_input = tokenizer.texts_to_sequences(texts_p)
     prediction_input = np.array(prediction_input).reshape(-1)
-    prediction_input = pad_sequences([prediction_input],8)
+    prediction_input = pad_sequences([prediction_input],9)
     
     output = model.predict(prediction_input)
     output = output.argmax()
