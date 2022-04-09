@@ -5,15 +5,12 @@ Created on Mon Mar 14 19:50:04 2022
 @author: sebasa
 """
 #importing the libraries
-import tensorflow as tf
-import numpy as np
 import pandas as pd
 import json
-import nltk
+import string
 from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.layers import Input, Embedding, LSTM , Dense,GlobalMaxPooling1D,Flatten
+from tensorflow.keras.layers import Input, Embedding, LSTM , Dense,Flatten
 from tensorflow.keras.models import Model
-import matplotlib.pyplot as plt
 import pickle
 
 
@@ -38,7 +35,7 @@ print(data)
 
 ###########Inputs transformation#######################
 #Cleaning up the inputs to make it ready for training
-import string
+
 #Converting all to lower case and removing punctuations if they exist
 data['inputs'] = data['inputs'].apply(lambda wrd:[ltrs.lower() for ltrs in wrd if ltrs not in string.punctuation])
 
@@ -46,7 +43,7 @@ data['inputs'] = data['inputs'].apply(lambda wrd:[ltrs.lower() for ltrs in wrd i
 data['inputs'] = data['inputs'].apply(lambda wrd: ''.join(wrd))
 
 #tokenize the data
-from tensorflow.keras.preprocessing.text import Tokenizer
+
 #Tokenizer num words tell the text_to_sequence function how many of the top num_words you want to convert
 #If num_words is 1 the text_to_sequence will only return a vectorized sequence with the top 1 word
 #fit_on_text will provide a word index. Giving an id for each word in your corpus. In this case the chat json
