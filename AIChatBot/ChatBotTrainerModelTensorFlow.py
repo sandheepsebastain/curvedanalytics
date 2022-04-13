@@ -9,10 +9,11 @@ import pandas as pd
 import json
 import string
 from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.layers import Input, Embedding, LSTM , Dense,Flatten
+from tensorflow.keras import Input
+from tensorflow.keras.layers import Embedding, LSTM , Dense,Flatten
 from tensorflow.keras.models import Model
 import pickle
-
+import pdb
 
 
 #importing the chat dataset
@@ -63,23 +64,12 @@ from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
 y_train = le.fit_transform(data['tags'])
 
-#input length
-input_shape = x_train.shape[1]
-print(input_shape)
-#define vocabulary
-vocabulary = len(tokenizer.word_index)
-print("number of unique words : ",vocabulary)
-#output length
-output_length = le.classes_.shape[0]
-print("output length: ",output_length)
-
-
 #creating the model
-i = Input(shape=(input_shape,))
-x = Embedding(vocabulary+1,10)(i)
+i = Input(shape=(x_train.shape[1],))
+x = Embedding(len(tokenizer.word_index)+1,10)(i)
 x = LSTM(10,return_sequences=True)(x)
 x = Flatten()(x)
-x = Dense(output_length,activation="softmax")(x)
+x = Dense(le.classes_.shape[0],activation="softmax")(x)
 model  = Model(i,x)
 #compiling the model
 model.compile(loss="sparse_categorical_crossentropy",optimizer='adam',metrics=['accuracy'])
