@@ -42,3 +42,13 @@ def APIChatBotAI(Chat_Message=None):
                     'Access-Control-Allow-Headers':'X-Requested-With'}
 
         return Response(szMessage, status=201, mimetype='application/json',headers=headers)
+
+@app.route('/api/handshake', methods=['GET'])
+def handshake():
+    headers = {'Content-Type':'application/json',
+                    'Access-Control-Allow-Origin':'*',
+                    'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS',
+                    'Access-Control-Allow-Headers':'X-Requested-With'}
+
+    return Response("Success", status=201, mimetype='application/json',headers=headers)
+
